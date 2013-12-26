@@ -219,8 +219,8 @@ describe Kitchen::Driver::Joyent do
     let(:config) do
       {
         joyent_url: 'https://us-sw-1.api.joyentcloud.com',
-        image_id: '87b9f4ac-5385-11e3-a304-fb868b82fe10',
-        flavor_id: 'g3-standard-4-smartos',
+        dataset: '87b9f4ac-5385-11e3-a304-fb868b82fe10',
+        package: 'g3-standard-4-smartos',
       }
     end
     before(:each) { @config = config.dup }

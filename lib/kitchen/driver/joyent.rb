@@ -28,8 +28,8 @@ module Kitchen
     # @author Sean OMerara <someara@gmail.com>
     class Joyent < Kitchen::Driver::SSHBase
       default_config :joyent_url, 'https://us-sw-1.api.joyentcloud.com'
-      default_config :joyent_image_id, '325dbc5e-2b90-11e3-8a3e-bfdcb1582a8d'
-      default_config :joyent_flavor_id, 'g3-standard-4-kvm'
+      default_config :joyent_image_id, '87b9f4ac-5385-11e3-a304-fb868b82fe10'
+      default_config :joyent_flavor_id, 'g3-standard-4-smartos'
       default_config :username, 'root'
       default_config :port, '22'
       default_config :sudo, false
