@@ -17,9 +17,9 @@
 # limitations under the License.
 
 module Kitchen
+  # Kitchen
   module Driver
     # Version string for Joyent Kitchen provider
     JOYENT_VERSION = '0.1.0'
   end
 end
-

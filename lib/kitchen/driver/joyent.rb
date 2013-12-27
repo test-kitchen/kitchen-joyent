@@ -1,3 +1,4 @@
+# Encoding: utf-8
 #
 # Author:: Sean OMeara (<someara@gmail.com>)
 #
@@ -37,11 +38,13 @@ module Kitchen
       def create(state)
         server = create_server
         state[:server_id] = server.id
-
         info("Joyent <#{state[:server_id]}> created.")
-        server.wait_for { print '.'; ready? } ; print '(server ready)'
+        server.wait_for { print '.'; ready? }
+
+        print '(server ready)'
         state[:hostname] = server.public_ip_address
-        wait_for_sshd(state[:hostname]) ; print "(ssh ready)\n"
+        wait_for_sshd(state[:hostname])
+        print "(ssh ready)\n"
         debug("joyent:create #{state[:hostname]}")
       rescue Fog::Errors::Error, Excon::Errors::Error => ex
         raise ActionFailed, ex.message
@@ -79,7 +82,7 @@ module Kitchen
           joyent_url:       config[:joyent_url],
           dataset:          config[:joyent_image_id],
           package:          config[:joyent_flavor_id],
-        )
+          )
       end
 
       def debug_server_config

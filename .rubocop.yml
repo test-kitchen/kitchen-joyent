@@ -1,5 +1,17 @@
-Documentation:
+AlignParameters:
   Enabled: false
 
+Encoding:
+  Enabled: false
+
+LineLength:
+  Max: 200
+
 Semicolon:
+  Enabled: false
+
+AccessModifierIndentation:
+  Enabled: false
+
+MethodLength:
   Enabled: false

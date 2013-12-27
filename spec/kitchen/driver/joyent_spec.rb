@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 #
 # Author:: Sean OMeara (<someara@gmail.com>)
 #
@@ -43,7 +44,7 @@ describe Kitchen::Driver::Joyent do
       it 'defaults to us-sw-1' do
         expect(driver[:joyent_url]).to eq('https://us-sw-1.api.joyentcloud.com')
       end
-      
+
       it 'defaults to a base64 13.3.0' do
         expect(driver[:joyent_image_id]).to eq('87b9f4ac-5385-11e3-a304-fb868b82fe10')
       end
@@ -60,7 +61,7 @@ describe Kitchen::Driver::Joyent do
       it 'does not use sudo' do
         expect(driver[:sudo]).to eq(false)
       end
-      
+
     end
 
     context 'overridden options' do
@@ -85,8 +86,10 @@ describe Kitchen::Driver::Joyent do
 
   describe '#create' do
     let(:server) do
-      double('id' => 'test123', 'wait_for' => true,
-           'public_ip_address' => '1.2.3.4')
+      double(
+        'id' => 'test123', 'wait_for' => true,
+        'public_ip_address' => '1.2.3.4'
+        )
     end
     let(:driver) do
       d = Kitchen::Driver::Joyent.new(config)
@@ -176,7 +179,7 @@ describe Kitchen::Driver::Joyent do
     let(:config) do
       {
         joyent_username: 'honeybadger',
-        joyent_keyname: 'dontcare',        
+        joyent_keyname: 'dontcare',
         joyent_keyfile: 'dat.pem'
       }
     end
@@ -240,5 +243,5 @@ describe Kitchen::Driver::Joyent do
     it 'creates the server using a compute connection' do
       expect(driver.send(:create_server)).to eq(@config)
     end
-  end  
+  end
 end
