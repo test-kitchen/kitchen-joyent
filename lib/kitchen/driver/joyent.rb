@@ -70,6 +70,7 @@ module Kitchen
           joyent_username:  config[:joyent_username],
           joyent_keyname:   config[:joyent_keyname],
           joyent_keyfile:   config[:joyent_keyfile],
+          joyent_url:       config[:joyent_url],
         }
 
         Fog::Compute.new(server_def)
@@ -79,7 +80,6 @@ module Kitchen
         debug_server_config
 
         compute.servers.create(
-          joyent_url:       config[:joyent_url],
           dataset:          config[:joyent_image_id],
           package:          config[:joyent_flavor_id],
           )
