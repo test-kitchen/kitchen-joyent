@@ -180,7 +180,8 @@ describe Kitchen::Driver::Joyent do
       {
         joyent_username: 'honeybadger',
         joyent_keyname: 'dontcare',
-        joyent_keyfile: 'dat.pem'
+        joyent_keyfile: 'dat.pem',
+        joyent_url: 'https://us-sw-1.api.joyentcloud.com'
       }
     end
 
@@ -221,7 +222,6 @@ describe Kitchen::Driver::Joyent do
   describe '#create_server' do
     let(:config) do
       {
-        joyent_url: 'https://us-sw-1.api.joyentcloud.com',
         dataset: '87b9f4ac-5385-11e3-a304-fb868b82fe10',
         package: 'g3-standard-4-smartos',
       }
