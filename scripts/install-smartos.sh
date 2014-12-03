@@ -1,4 +1,4 @@
-pkgin -y install ruby193
-pkgin -y install gcc47
+pkgin -y install ruby-2.1.4
+pkgin -y install gcc49
 pkgin -y install gmake
-gem install chef --version 11.10.0 --no-ri --no-rdoc
+gem install chef --version 11.16.0 --no-ri --no-rdoc
