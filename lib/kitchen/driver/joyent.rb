@@ -69,11 +69,12 @@ module Kitchen
         debug_compute_config
 
         server_def = {
-          provider:         :joyent,
-          joyent_username:  config[:joyent_username],
-          joyent_keyname:   config[:joyent_keyname],
-          joyent_keyfile:   config[:joyent_keyfile],
-          joyent_url:       config[:joyent_url],
+          provider:               :joyent,
+          joyent_username:        config[:joyent_username],
+          joyent_keyname:         config[:joyent_keyname],
+          joyent_keyfile:         config[:joyent_keyfile],
+          joyent_url:             config[:joyent_url],
+          joyent_ssl_verify_peer: config[:joyent_ssl_verify_peer],
         }
 
         Fog::Compute.new(server_def)
