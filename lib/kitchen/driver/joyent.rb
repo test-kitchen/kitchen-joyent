@@ -30,7 +30,10 @@ module Kitchen
     class Joyent < Kitchen::Driver::SSHBase
       default_config :joyent_url, 'https://us-sw-1.api.joyentcloud.com'
       default_config :joyent_image_id, '87b9f4ac-5385-11e3-a304-fb868b82fe10'
+      default_config :joyent_image_name, ''
       default_config :joyent_flavor_id, 'g3-standard-4-smartos'
+      default_config :joyent_networks, []
+      default_config :joyent_ssl_verify_peer, true
       default_config :username, 'root'
       default_config :port, '22'
       default_config :sudo, false
@@ -82,6 +85,8 @@ module Kitchen
         compute.servers.create(
           dataset:          config[:joyent_image_id],
           package:          config[:joyent_flavor_id],
+          name:             config[:joyent_image_name],
+          networks:         config[:joyent_networks],
           )
       end
 
@@ -89,6 +94,8 @@ module Kitchen
         debug("joyent: joyent_url #{config[:joyent_url]}")
         debug("joyent: image_id #{config[:joyent_image_id]}")
         debug("joyent: flavor_id #{config[:joyent_flavor_id]}")
+        debug("joyent: image_name #{config[:joyent_image_name]}")
+        debug("joyent: networks #{config[:joyent_networks]}")
       end
 
       def debug_compute_config
