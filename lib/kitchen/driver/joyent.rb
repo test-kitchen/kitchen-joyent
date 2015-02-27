@@ -33,6 +33,7 @@ module Kitchen
       default_config :joyent_image_name, ''
       default_config :joyent_flavor_id, 'g3-standard-4-smartos'
       default_config :joyent_networks, []
+      default_config :joyent_default_networks, []
       default_config :joyent_ssl_verify_peer, true
       default_config :username, 'root'
       default_config :port, '22'
@@ -88,6 +89,7 @@ module Kitchen
           package:          config[:joyent_flavor_id],
           name:             config[:joyent_image_name],
           networks:         config[:joyent_networks],
+          default_networks: config[:joyent_default_networks],
           )
       end
 
