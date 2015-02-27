@@ -87,7 +87,7 @@ module Kitchen
           dataset:          config[:joyent_image_id],
           package:          config[:joyent_flavor_id],
           name:             config[:joyent_image_name],
-          networks:         config[:joyent_networks],
+          default_networks: config[:joyent_networks],
           )
       end
 
