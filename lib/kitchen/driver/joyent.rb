@@ -103,8 +103,16 @@ module Kitchen
         debug("joyent: joyent_url #{config[:joyent_url]}")
         debug("joyent: image_id #{config[:joyent_image_id]}")
         debug("joyent: flavor_id #{config[:joyent_flavor_id]}")
-        debug("joyent: image_name #{config[:joyent_image_name]}")
-        debug("joyent: networks #{config[:joyent_networks]}")
+        
+        unless config[:joyent_image_name].length == 0
+          debug("joyent: image_name #{config[:joyent_image_name]}")
+        end
+        if config[:joyent_networks].any?
+          debug("joyent: networks #{config[:joyent_networks]}")
+        end
+        if config[:joyent_default_networks].any?
+          debug("joyent: default_networks #{config[:joyent_networks]}")
+        end
       end
 
       def debug_compute_config
