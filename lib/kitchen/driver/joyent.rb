@@ -83,16 +83,20 @@ module Kitchen
 
       def create_server
         debug_server_config
-
-        compute.servers.create(
+        
+        compute_def = {
           dataset:          config[:joyent_image_id],
           package:          config[:joyent_flavor_id],
           name:             config[:joyent_image_name],
-          networks:         config[:joyent_networks],
-          if config[:joyent_default_networks].any?
-            default_networks: config[:joyent_default_networks],
-          end
-          )
+        }
+        
+        if config[:joyent_networks].any?
+          compute_def[:networks] = config[:joyent_networks]
+        elsif config[:joyent_default_networks].any?
+          compute_def[:default_networks] = config[:joyent_default_networks]
+        end
+
+        compute.servers.create(compute_def)
       end
 
       def debug_server_config
