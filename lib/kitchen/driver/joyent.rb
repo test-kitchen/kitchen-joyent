@@ -75,7 +75,9 @@ module Kitchen
           joyent_keyname:         config[:joyent_keyname],
           joyent_keyfile:         config[:joyent_keyfile],
           joyent_url:             config[:joyent_url],
-          joyent_ssl_verify_peer: config[:joyent_ssl_verify_peer],
+          connection_options:     {
+                                    ssl_verify_peer: config[:joyent_ssl_verify_peer],
+                                  },
         }
 
         Fog::Compute.new(server_def)
