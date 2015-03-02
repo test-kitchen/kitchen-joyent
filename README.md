@@ -30,7 +30,33 @@ Provide, at a minimum, the required driver options in your `.kitchen.yml` file:
       
 Until we get SmartOS, OmniOS, and FreeBSD into Omnitruck, you'll need
 to override the Chef bootstrap script.
-      chef_omnibus_url: http://path.to.an.script.sh 
+      chef_omnibus_url: http://path.to.an.script.sh
+
+## Optional Attributes
+Under `platforms` section:
+
+    driver_config:
+      # Allow self-signed certs.
+      #
+      joyent_ssl_verify_peer: false
+      
+      # For additional nics
+      #
+      joyent_networks:
+        - d2ba0f30-bbe8-11e2-a9a2-6bc116856d85
+        - a3a84a44-766c-407e-9233-9a45ebcd579f
+        
+      # For images without a default network (will throw error if invalid)
+      # NOTE: Don't use 'joyent_networks' if using this attribute.
+      #
+      joyent_default_networks:
+        - d2ba0f30-bbe8-11e2-a9a2-6bc116856d85
+        - a3a84a44-766c-407e-9233-9a45ebcd579f
+        
+Under `suites` section:
+
+    driver_config:
+      joyent_image_name: default01
 
 # Example .kitchen.yml
 
