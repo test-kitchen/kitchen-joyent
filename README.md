@@ -37,8 +37,6 @@ Under `platforms` section:
 
     driver_config:
       # Allow self-signed certs.
-      # Possible warning from fog gem:
-      #   [fog][WARNING] Unrecognized arguments: joyent_ssl_verify_peer
       #
       joyent_ssl_verify_peer: false
       
@@ -49,6 +47,7 @@ Under `platforms` section:
         - a3a84a44-766c-407e-9233-9a45ebcd579f
         
       # For images without a default network (will throw error if invalid)
+      # NOTE: Don't use 'joyent_networks' if using this attribute.
       #
       joyent_default_networks:
         - d2ba0f30-bbe8-11e2-a9a2-6bc116856d85
