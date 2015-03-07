@@ -32,6 +32,7 @@ module Kitchen
       default_config :joyent_image_id, '87b9f4ac-5385-11e3-a304-fb868b82fe10'
       default_config :joyent_image_name, ''
       default_config :joyent_flavor_id, 'g3-standard-4-smartos'
+      default_config :joyent_version, '~6.5'
       default_config :joyent_networks, []
       default_config :joyent_default_networks, []
       default_config :joyent_ssl_verify_peer, true
@@ -75,6 +76,7 @@ module Kitchen
           joyent_keyname:         config[:joyent_keyname],
           joyent_keyfile:         config[:joyent_keyfile],
           joyent_url:             config[:joyent_url],
+          joyent_version:         config[:joyent_version],
           connection_options:     {
                                     ssl_verify_peer: config[:joyent_ssl_verify_peer],
                                   },
@@ -92,9 +94,13 @@ module Kitchen
           name:             config[:joyent_image_name],
         }
         
+        # Requires "joyent_version" >= 7.0
         if config[:joyent_networks].any?
           compute_def[:networks] = config[:joyent_networks]
-        elsif config[:joyent_default_networks].any?
+        end
+        
+        # "internal" and/or "external"
+        if config[:joyent_default_networks].any?
           compute_def[:default_networks] = config[:joyent_default_networks]
         end
 
@@ -105,6 +111,7 @@ module Kitchen
         debug("joyent: joyent_url #{config[:joyent_url]}")
         debug("joyent: image_id #{config[:joyent_image_id]}")
         debug("joyent: flavor_id #{config[:joyent_flavor_id]}")
+        debug("joyent: version #{config[:joyent_version]}")
         
         unless config[:joyent_image_name].length == 0
           debug("joyent: image_name #{config[:joyent_image_name]}")

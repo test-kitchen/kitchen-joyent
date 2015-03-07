@@ -33,31 +33,35 @@ to override the Chef bootstrap script.
       chef_omnibus_url: http://path.to.an.script.sh
 
 ## Optional Attributes
-Under `platforms` section:
+Under the general `driver_config`:
+````
+# Specify Joyent API version
+joyent_version: '~7.0'
 
-    driver_config:
-      # Allow self-signed certs.
-      #
-      joyent_ssl_verify_peer: false
-      
-      # For additional nics
-      #
-      joyent_networks:
-        - d2ba0f30-bbe8-11e2-a9a2-6bc116856d85
-        - a3a84a44-766c-407e-9233-9a45ebcd579f
-        
-      # For images without a default network (will throw error if invalid)
-      # NOTE: Don't use 'joyent_networks' if using this attribute.
-      #
-      joyent_default_networks:
-        - d2ba0f30-bbe8-11e2-a9a2-6bc116856d85
-        - a3a84a44-766c-407e-9233-9a45ebcd579f
-        
-Under `suites` section:
+# Allow self-signed certs.
+joyent_ssl_verify_peer: false
+````
+Usually under `platforms` section:
+````
+driver_config:
 
-    driver_config:
-      joyent_image_name: default01
+  # For additional nics
+  # NOTE: Requires Joyent API version >= 7.0
+  joyent_networks:
+    - d2ba0f30-bbe8-11e2-a9a2-6bc116856d85
+    - a3a84a44-766c-407e-9233-9a45ebcd579f
+    
+  # Where to pull IP's from by default (internal/external)
+  joyent_default_networks:
+    - internal
+```
+Usually under `suites` section:
+```
+driver_config:
 
+  # Friendly machine name
+  joyent_image_name: default01
+```
 # Example .kitchen.yml
 
 ```
