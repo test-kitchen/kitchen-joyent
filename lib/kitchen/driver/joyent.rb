@@ -91,7 +91,7 @@ module Kitchen
         compute_def = {
           dataset:          config[:joyent_image_id],
           package:          config[:joyent_flavor_id],
-          name:             config[:joyent_image_name],
+          name:             config[:joyent_image_name].gsub!(/_/, '-').gsub!(/[^0-9A-Za-z\.-]/, ''),
         }
         
         # Requires "joyent_version" >= 7.0
