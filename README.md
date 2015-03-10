@@ -60,6 +60,7 @@ Usually under `suites` section:
 driver_config:
 
   # Friendly machine name
+  # Valid Chracters =~ /0-9A-Za-z\.-/
   joyent_image_name: default01
 ```
 # Example .kitchen.yml
