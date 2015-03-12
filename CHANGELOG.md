@@ -1,3 +1,7 @@
+v0.2.2 (2015-03-10)
+-------------------
+- Fixing bug in joyent_image_name regex
+
 v0.2.1 (2015-03-10)
 -------------------
 - Dropping invalid characters for joyent_image_name
