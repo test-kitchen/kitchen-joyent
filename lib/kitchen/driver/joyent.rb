@@ -31,6 +31,8 @@ module Kitchen
       default_config :joyent_url, 'https://us-sw-1.api.joyentcloud.com'
       default_config :joyent_image_id, '87b9f4ac-5385-11e3-a304-fb868b82fe10'
       default_config :joyent_image_name, nil
+      default_config :joyent_image_tags, {}
+      default_config :joyent_image_metadata, {}
       default_config :joyent_flavor_id, 'g3-standard-4-smartos'
       default_config :joyent_version, '~6.5'
       default_config :joyent_networks, []
@@ -108,6 +110,17 @@ module Kitchen
         # "internal" and/or "external"
         if config[:joyent_default_networks].any?
           compute_def[:default_networks] = config[:joyent_default_networks]
+        end
+        
+        # Adds "Customer Metadata" fields to machine.
+        # TODO: Figure out how to override "Internal Metadata"
+        config[:joyent_image_metadata].each do |key, value|
+          compute_def["metadata.#{key}"] = value
+        end
+
+        # Adds tags to machine
+        config[:joyent_image_tags].each do |key, value|
+          compute_def["tag.#{key}"] = value
         end
 
         compute.servers.create(compute_def)
