@@ -34,7 +34,7 @@ to override the Chef bootstrap script.
 
 ## Optional Attributes
 Under the general `driver_config`:
-````
+````yaml
 # Specify Joyent API version
 joyent_version: '~7.0'
 
@@ -42,7 +42,7 @@ joyent_version: '~7.0'
 joyent_ssl_verify_peer: false
 ````
 Usually under `platforms` section:
-````
+````yaml
 driver_config:
 
   # For additional nics
@@ -56,16 +56,24 @@ driver_config:
     - internal
 ```
 Usually under `suites` section:
-```
+```yaml
 driver_config:
 
-  # Friendly machine name
+  # Friendly machine name (defaults to: "<joyent_username>-<suite>-<platform>")
   # Valid Chracters =~ /0-9A-Za-z\.-/
   joyent_image_name: default01
+  
+  # Metadata for the machine
+  joyent_image_metadata:
+    user1_pw: password
+
+  # Insert Tags for the machine
+  joyent_image_tags:
+    role: testing
 ```
 # Example .kitchen.yml
 
-```
+```yaml
 ---
 driver_plugin: joyent
 driver_config:
