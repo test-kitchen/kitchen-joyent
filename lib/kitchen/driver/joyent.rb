@@ -21,6 +21,7 @@ require 'fog'
 require 'kitchen'
 require 'etc'
 require 'socket'
+require 'securerandom'
 
 module Kitchen
   module Driver
@@ -91,7 +92,7 @@ module Kitchen
         debug_server_config
         
         if config[:joyent_image_name].nil?
-          config[:joyent_image_name] = "#{config[:joyent_username].gsub(/[^0-9A-Za-z\-]/, '')}-#{instance.name}"
+          config[:joyent_image_name] = "#{config[:joyent_username].gsub(/[^0-9A-Za-z\-]/, '')}-#{instance.name}-#{SecureRandom.hex(3)}"
         else
           config[:joyent_image_name] = config[:joyent_image_name].gsub(/_/, '-').gsub(/[^0-9A-Za-z\.-]/, '')
         end
