@@ -32,6 +32,7 @@ module Kitchen
       default_config :joyent_image_id, '87b9f4ac-5385-11e3-a304-fb868b82fe10'
       default_config :joyent_image_name, ''
       default_config :joyent_flavor_id, 'g3-standard-4-smartos'
+      default_config :joyent_tags, {}
       default_config :joyent_version, '~6.5'
       default_config :joyent_networks, []
       default_config :joyent_default_networks, []
@@ -50,6 +51,7 @@ module Kitchen
         state[:hostname] = server.public_ip_address
         wait_for_sshd(state[:hostname])
         print "(ssh ready)\n"
+        tag_server(state[:server_id])
         debug("joyent:create #{state[:hostname]}")
       rescue Fog::Errors::Error, Excon::Errors::Error => ex
         raise ActionFailed, ex.message
@@ -87,18 +89,18 @@ module Kitchen
 
       def create_server
         debug_server_config
-        
+
         compute_def = {
           dataset:          config[:joyent_image_id],
           package:          config[:joyent_flavor_id],
           name:             config[:joyent_image_name].gsub(/_/, '-').gsub(/[^0-9A-Za-z\.-]/, ''),
         }
-        
+
         # Requires "joyent_version" >= 7.0
         if config[:joyent_networks].any?
           compute_def[:networks] = config[:joyent_networks]
         end
-        
+
         # "internal" and/or "external"
         if config[:joyent_default_networks].any?
           compute_def[:default_networks] = config[:joyent_default_networks]
@@ -107,12 +109,19 @@ module Kitchen
         compute.servers.create(compute_def)
       end
 
+      def tag_server(id)
+        if config[:joyent_tags].any?
+          debug_tag_config
+          compute.add_machine_tags(id, config[:joyent_tags])
+        end
+      end
+
       def debug_server_config
         debug("joyent: joyent_url #{config[:joyent_url]}")
         debug("joyent: image_id #{config[:joyent_image_id]}")
         debug("joyent: flavor_id #{config[:joyent_flavor_id]}")
         debug("joyent: version #{config[:joyent_version]}")
-        
+
         unless config[:joyent_image_name].length == 0
           debug("joyent: image_name #{config[:joyent_image_name]}")
         end
@@ -128,6 +137,12 @@ module Kitchen
         debug("joyent_username #{config[:joyent_username]}")
         debug("joyent_keyname #{config[:joyent_keyname]}")
         debug("joyent_keyfile #{config[:joyent_keyfile]}")
+      end
+
+      def debug_tag_config
+        config[:joyent_tags].each do |k,v|
+          debug("joyent: tag #{k}: #{v}")
+        end
       end
     end
   end
