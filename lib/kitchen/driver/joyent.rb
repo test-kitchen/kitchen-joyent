@@ -16,11 +16,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'benchmark'
-require 'fog'
-require 'kitchen'
-require 'etc'
-require 'socket'
+require "benchmark"
+require "fog"
+require "kitchen"
+require "etc"
+require "socket"
 
 module Kitchen
   module Driver
@@ -28,26 +28,26 @@ module Kitchen
     #
     # @author Sean OMerara <someara@gmail.com>
     class Joyent < Kitchen::Driver::SSHBase
-      default_config :joyent_url, 'https://us-sw-1.api.joyentcloud.com'
-      default_config :joyent_image_id, '87b9f4ac-5385-11e3-a304-fb868b82fe10'
-      default_config :joyent_image_name, ''
-      default_config :joyent_flavor_id, 'g3-standard-4-smartos'
+      default_config :joyent_url, "https://us-sw-1.api.joyentcloud.com"
+      default_config :joyent_image_id, "87b9f4ac-5385-11e3-a304-fb868b82fe10"
+      default_config :joyent_image_name, ""
+      default_config :joyent_flavor_id, "g3-standard-4-smartos"
       default_config :joyent_tags, {}
-      default_config :joyent_version, '~6.5'
+      default_config :joyent_version, "~6.5"
       default_config :joyent_networks, []
       default_config :joyent_default_networks, []
       default_config :joyent_ssl_verify_peer, true
-      default_config :username, 'root'
-      default_config :port, '22'
+      default_config :username, "root"
+      default_config :port, "22"
       default_config :sudo, false
 
       def create(state)
         server = create_server
         state[:server_id] = server.id
         info("Joyent <#{state[:server_id]}> created.")
-        server.wait_for { print '.'; ready? }
+        server.wait_for { print "."; ready? }
 
-        print '(server ready)'
+        print "(server ready)"
         state[:hostname] = server.public_ip_address
         wait_for_sshd(state[:hostname])
         print "(ssh ready)\n"
@@ -73,13 +73,13 @@ module Kitchen
         debug_compute_config
 
         server_def = {
-          provider:               :joyent,
-          joyent_username:        config[:joyent_username],
-          joyent_keyname:         config[:joyent_keyname],
-          joyent_keyfile:         config[:joyent_keyfile],
-          joyent_url:             config[:joyent_url],
-          joyent_version:         config[:joyent_version],
-          connection_options:     {
+          provider: :joyent,
+          joyent_username: config[:joyent_username],
+          joyent_keyname: config[:joyent_keyname],
+          joyent_keyfile: config[:joyent_keyfile],
+          joyent_url: config[:joyent_url],
+          joyent_version: config[:joyent_version],
+          connection_options: {
                                     ssl_verify_peer: config[:joyent_ssl_verify_peer],
                                   },
         }
@@ -91,9 +91,9 @@ module Kitchen
         debug_server_config
 
         compute_def = {
-          dataset:          config[:joyent_image_id],
-          package:          config[:joyent_flavor_id],
-          name:             config[:joyent_image_name].gsub(/_/, '-').gsub(/[^0-9A-Za-z\.-]/, ''),
+          dataset: config[:joyent_image_id],
+          package: config[:joyent_flavor_id],
+          name: config[:joyent_image_name].gsub(/_/, "-").gsub(/[^0-9A-Za-z\.-]/, ""),
         }
 
         # Requires "joyent_version" >= 7.0
@@ -140,7 +140,7 @@ module Kitchen
       end
 
       def debug_tag_config
-        config[:joyent_tags].each do |k,v|
+        config[:joyent_tags].each do |k, v|
           debug("joyent: tag #{k}: #{v}")
         end
       end
