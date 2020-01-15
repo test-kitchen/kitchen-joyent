@@ -25,5 +25,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rake', '~> 0'
   spec.add_development_dependency 'cane', '~> 3'
   spec.add_development_dependency 'countloc', '~> 0'
-  spec.add_development_dependency 'rspec', '~> 0'
+  spec.add_development_dependency 'rspec', '~> 3'
 end
