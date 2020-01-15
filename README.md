@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/test-kitchen/kitchen-joyent.svg?branch=master)](https://travis-ci.org/test-kitchen/kitchen-joyent)
+
 # Kitchen::Joyent
 
 A Joyent API driver for Test Kitchen
@@ -30,8 +32,8 @@ Provide, at a minimum, the required driver options in your `.kitchen.yml` file:
       joyent_keyfile: <%= ENV['SDC_CLI_IDENTITY'] %>
       joyent_keyname: <%= ENV['SDC_CLI_KEY_ID'] %>
       joyent_url: <%= ENV['SDC_CLI_URL'] %>
-      require_chef_omnibus: latest (if you'll be using Chef)      
-      
+      require_chef_omnibus: latest (if you'll be using Chef)
+
 Until we get SmartOS, OmniOS, and FreeBSD into Omnitruck, you'll need
 to override the Chef bootstrap script.
       chef_omnibus_url: http://path.to.an.script.sh
@@ -54,7 +56,7 @@ driver_config:
   joyent_networks:
     - d2ba0f30-bbe8-11e2-a9a2-6bc116856d85
     - a3a84a44-766c-407e-9233-9a45ebcd579f
-    
+
   # Where to pull IP's from by default (internal/external)
   joyent_default_networks:
     - internal

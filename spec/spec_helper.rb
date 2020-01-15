@@ -16,9 +16,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'rspec'
-require 'rspec/autorun'
-require_relative '../lib/kitchen/driver/joyent'
+require "rspec"
+require "rspec/autorun"
+require_relative "../lib/kitchen/driver/joyent"
 
 RSpec.configure do |config|
   config.tty = true

@@ -20,6 +20,6 @@ module Kitchen
   # Kitchen
   module Driver
     # Version string for Joyent Kitchen provider
-    JOYENT_VERSION = '0.2.2'
+    JOYENT_VERSION = "0.2.2".freeze
   end
 end
