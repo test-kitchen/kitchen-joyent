@@ -23,7 +23,6 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'chefstyle'
   spec.add_development_dependency 'rake'
-  spec.add_development_dependency 'cane', '~> 3'
   spec.add_development_dependency 'countloc'
   spec.add_development_dependency 'rspec', '~> 3'
 end

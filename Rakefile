@@ -1,11 +1,7 @@
 require 'bundler/gem_tasks'
 require 'rubocop/rake_task'
 require 'chefstyle'
-require 'cane/rake_task'
 require 'rspec/core/rake_task'
-
-desc 'Run Cane to check quality metrics'
-Cane::RakeTask.new
 
 desc 'Run RuboCop on the lib directory'
 RuboCop::RakeTask.new(:rubocop) do |task|
@@ -23,4 +19,4 @@ end
 desc 'Run RSpec unit tests'
 RSpec::Core::RakeTask.new(:spec)
 
-task :default => [:cane, :rubocop, :loc, :spec]
+task :default => [:rubocop, :loc, :spec]
