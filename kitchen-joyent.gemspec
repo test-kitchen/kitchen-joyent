@@ -21,9 +21,9 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'test-kitchen', '>= 1.3', '< 3.0'
   spec.add_dependency 'fog', '~> 1.28'
 
-  spec.add_development_dependency 'rubocop', '~> 0'
-  spec.add_development_dependency 'rake', '~> 0'
+  spec.add_development_dependency 'chefstyle'
+  spec.add_development_dependency 'rake'
   spec.add_development_dependency 'cane', '~> 3'
-  spec.add_development_dependency 'countloc', '~> 0'
-  spec.add_development_dependency 'rspec', '~> 0'
+  spec.add_development_dependency 'countloc'
+  spec.add_development_dependency 'rspec', '~> 3'
 end
