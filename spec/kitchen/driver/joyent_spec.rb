@@ -33,9 +33,7 @@ describe Kitchen::Driver::Joyent do
   end
 
   let(:driver) do
-    d = Kitchen::Driver::Joyent.new(config)
-    d.instance = instance
-    d
+    Kitchen::Driver::Joyent.new(config)
   end
 
   describe "#initialize" do
@@ -93,7 +91,6 @@ describe Kitchen::Driver::Joyent do
     end
     let(:driver) do
       d = Kitchen::Driver::Joyent.new(config)
-      d.instance = instance
       d.stub(:create_server).and_return(server)
       d.stub(:wait_for_sshd).with("1.2.3.4").and_return(true)
       d
@@ -130,7 +127,6 @@ describe Kitchen::Driver::Joyent do
 
     let(:driver) do
       d = Kitchen::Driver::Joyent.new(config)
-      d.instance = instance
       d.stub(:compute).and_return(compute)
       d
     end
@@ -163,7 +159,6 @@ describe Kitchen::Driver::Joyent do
       let(:compute) { double(servers: servers) }
       let(:driver) do
         d = Kitchen::Driver::Joyent.new(config)
-        d.instance = instance
         d.stub(:compute).and_return(compute)
         d
       end
@@ -178,10 +173,12 @@ describe Kitchen::Driver::Joyent do
   describe "#compute" do
     let(:config) do
       {
+        connection_options: { ssl_verify_peer: true },
         joyent_username: "honeybadger",
         joyent_keyname: "dontcare",
         joyent_keyfile: "dat.pem",
         joyent_url: "https://us-sw-1.api.joyentcloud.com",
+        joyent_version: "~6.5",
       }
     end
 
@@ -223,6 +220,7 @@ describe Kitchen::Driver::Joyent do
     let(:config) do
       {
         dataset: "87b9f4ac-5385-11e3-a304-fb868b82fe10",
+        name: "",
         package: "g3-standard-4-smartos",
       }
     end
@@ -235,7 +233,6 @@ describe Kitchen::Driver::Joyent do
     let(:compute) { double(servers: servers) }
     let(:driver) do
       d = Kitchen::Driver::Joyent.new(config)
-      d.instance = instance
       d.stub(:compute).and_return(compute)
       d
     end
